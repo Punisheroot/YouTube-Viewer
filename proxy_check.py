@@ -79,11 +79,11 @@ except:
 checked = {}
 
 
-def load_proxy():
+def load_proxy(file = ""):
     proxies = []
 
     filename = input(bcolors.OKBLUE +
-                     'Enter your proxy file name: ' + bcolors.ENDC)
+                     'Enter your proxy file name: ' + bcolors.ENDC) if file == "" else file
     load = open(filename)
     loaded = [items.rstrip().strip() for items in load]
     load.close()
@@ -165,11 +165,15 @@ def main():
             pass
 
 
-if __name__ == '__main__':
-    threads = int(
-        input(bcolors.OKBLUE+'Threads (recommended = 100): ' + bcolors.ENDC))
-
-    proxy_list = load_proxy()
+def load(file):
+    #threads = int(
+    #    input(bcolors.OKBLUE+'Threads (recommended = 100): ' + bcolors.ENDC))
+    global threads
+    global total_proxies
+    global proxy_list
+    
+    threads = 100
+    proxy_list = load_proxy(file)
     proxy_list = list(set(proxy_list))  # removing duplicate proxies
     proxy_list = list(filter(None, proxy_list))  # removing empty proxies
 
